@@ -14,4 +14,5 @@
 1. jsonFormat 이 있어도 안되는걸 보아해서 이건 아니라고 판단
 2. Collection type 적용되는것 확인
 3. 객체 타입 안에 객체타입이 있어도 변환되는것 확인
-4. 필드 객체 안에 enum type 이 있을경우 오류
+4. 필드 객체 안에 enum type 이 있을경우 오류 
+ * 정정: 필드 객체 안에 enum type 있고 JsonFormat Object 가 있으면 안되고, enum type 이여도 JsonFormat 이 없으면 상수 이름으로 변환 성공
