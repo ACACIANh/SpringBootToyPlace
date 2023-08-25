@@ -5,6 +5,7 @@ import com.example.jsoncolumnmapping.entity.NormalEntity;
 import com.example.jsoncolumnmapping.enums.JsonFormatEnum;
 import com.example.jsoncolumnmapping.object.JsonFormatObject;
 import com.example.jsoncolumnmapping.object.NormalObject;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,20 @@ class JsonFormatRepositoryTest {
 	@Test
 	void autowiredTest() throws Exception {
 		Assertions.assertThat( jsonFormatRepository ).isNotNull();
+	}
+
+	@Test
+	void objectMapperTest() throws Exception {
+
+		JsonFormatObject jsonFormatObject = new JsonFormatObject( JsonFormatEnum.FIRST, "second" );
+
+		JsonFormatEntity jsonFormatEntity = new JsonFormatEntity( 0L, jsonFormatObject, "\"key\": \"second\"" );
+
+		ObjectMapper objectMapper = new ObjectMapper();
+
+		String s = objectMapper.writeValueAsString( jsonFormatEntity );
+
+		System.out.println( s );
 	}
 
 	@Test
