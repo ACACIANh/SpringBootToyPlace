@@ -20,9 +20,10 @@ public class NormalEntity {
 	@Id
 	private Long id;
 
-	@Type( JsonType.class )
-	private String field_first;
+	//	@Type( JsonType.class )
+//	private String first;
+	
 
-	@Type( JsonType.class )
-	private String field_second;
+//	@Type( JsonType.class )
+//	private String second;
 }
