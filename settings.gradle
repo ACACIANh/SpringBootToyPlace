@@ -1,2 +1,3 @@
 rootProject.name = 'SpringBootToyPlace'
 include 'JsonColumnMapping'
+include 'SwaggerPractice'
