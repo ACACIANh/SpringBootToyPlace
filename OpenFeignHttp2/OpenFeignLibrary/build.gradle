@@ -1,0 +1,20 @@
+version = '0.0.1'
+ext {
+    set('springCloudVersion', "2022.0.1")
+}
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+dependencies {
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    implementation 'io.github.openfeign:feign-okhttp:12.4'
+    implementation 'io.github.openfeign:feign-httpclient:12.4'
+}
+bootJar {
+    enabled = false
+}
+jar {
+    archiveFileName = project.name + "-" + version + '.jar'
+}
