@@ -1,5 +1,6 @@
 rootProject.name = 'SpringBootToyPlace'
 include 'JsonColumnMapping'
+include 'JsonCreatorPractice'
 include 'SwaggerPractice'
 include 'RequestSpecialCharacter'
 include 'OpenFeignHttp2'
