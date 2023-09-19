@@ -1,5 +1,6 @@
 rootProject.name = 'SpringBootToyPlace'
 include 'EnumStrategy'
+include 'InstanceTypeCheck'
 include 'JsonColumnMapping'
 include 'JsonCreatorPractice'
 include 'OpenFeignConfiguration'
