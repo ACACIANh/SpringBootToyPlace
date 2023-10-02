@@ -27,14 +27,14 @@ public class QuartzConfiguration {
 	@Bean
 	public SchedulerFactoryBean schedulerFactoryBean() {
 		SchedulerFactoryBean schedulerFactoryBean = new SchedulerFactoryBean();
-		schedulerFactoryBean.setAutoStartup( quartzProperties.isAutoStartup() );
 		schedulerFactoryBean.setApplicationContext( applicationContext );
 		schedulerFactoryBean.setDataSource( dataSource );
 		schedulerFactoryBean.setJobFactory( springBeanJobFactory() );
 		schedulerFactoryBean.setGlobalTriggerListeners( triggerListenerComponent );
 		schedulerFactoryBean.setGlobalJobListeners( jobListenerComponent );
-		schedulerFactoryBean.setOverwriteExistingJobs( true );
-		schedulerFactoryBean.setWaitForJobsToCompleteOnShutdown( true );
+		schedulerFactoryBean.setAutoStartup( quartzProperties.isAutoStartup() );
+		schedulerFactoryBean.setOverwriteExistingJobs( quartzProperties.isOverwriteExistingJobs() );
+		schedulerFactoryBean.setWaitForJobsToCompleteOnShutdown( quartzProperties.isWaitForJobsToCompleteOnShutdown() );
 
 		Properties properties = new Properties();
 		properties.putAll( quartzProperties.getProperties() );

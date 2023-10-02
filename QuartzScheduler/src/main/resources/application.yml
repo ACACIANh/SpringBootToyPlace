@@ -16,7 +16,7 @@ spring:
         format_sql: true
         show_sql: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
       show-sql: true
     generate-ddl: false
     dialect: org.hibernate.dialect.MysqlDialect
@@ -28,4 +28,7 @@ spring:
       initialize-schema: embedded
       schema: classpath:tables_mysql.sql
       platform: mysql
+    wait-for-jobs-to-complete-on-shutdown: true
+    overwrite-existing-jobs: true
+    auto-startup: true
   # quartz 에 대한 porperty 정보들은 quartz.properties 파일로 이동
