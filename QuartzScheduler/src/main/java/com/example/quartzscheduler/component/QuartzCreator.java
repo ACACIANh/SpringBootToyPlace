@@ -44,7 +44,7 @@ public class QuartzCreator {
 		factoryBean.setName( jobRequest.getJobName().concat( "Trigger" ) );
 		factoryBean.setGroup( jobRequest.getJobGroup() );
 		factoryBean.setCronExpression( jobRequest.getCronExpression() );
-		factoryBean.setMisfireInstruction( SimpleTrigger.MISFIRE_INSTRUCTION_FIRE_NOW );
+		factoryBean.setMisfireInstruction( CronTrigger.MISFIRE_INSTRUCTION_FIRE_ONCE_NOW );
 
 		JobDataMap jobDataMap = new JobDataMap();
 		jobDataMap.put( "failCnt", "0" );
