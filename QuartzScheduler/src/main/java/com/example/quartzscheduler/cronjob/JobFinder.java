@@ -3,6 +3,7 @@ package com.example.quartzscheduler.cronjob;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.quartz.Job;
+import org.springframework.scheduling.quartz.QuartzJobBean;
 
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -24,7 +25,7 @@ public enum JobFinder {
 	}
 
 	private final String className;
-	private final Class< ? extends Job > jobClass;
+	private final Class< ? extends QuartzJobBean > jobClass;
 
 	public static Optional< JobFinder > findByName( String className ) {
 		// todo: 개선 요소 - 검사 시 ignore case

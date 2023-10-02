@@ -7,6 +7,7 @@ import com.example.quartzscheduler.exception.ServiceErrorCode;
 import com.example.quartzscheduler.exception.ServiceException;
 import lombok.RequiredArgsConstructor;
 import org.quartz.*;
+import org.springframework.scheduling.quartz.QuartzJobBean;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +30,7 @@ public class QuartzService {
 	}
 
 	private void addScheduleJob( JobRequest jobRequest ) throws ParseException, SchedulerException {
-		Class< ? extends Job > jobClass = JobFinder.findByName( jobRequest.getJobClass() )
+		Class< ? extends QuartzJobBean > jobClass = JobFinder.findByName( jobRequest.getJobClass() )
 				.orElseThrow( () -> new ServiceException( ServiceErrorCode.JOB_IS_ALREADY_EXIST ) )
 				.getJobClass();
 		JobDetail jobDetail = quartzCreator.createJob( jobRequest, jobClass );

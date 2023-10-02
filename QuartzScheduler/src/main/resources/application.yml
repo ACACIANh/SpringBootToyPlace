@@ -25,7 +25,7 @@ spring:
     scheduler-name: MyQuartzScheduler
     job-store-type: jdbc
     jdbc:
-      initialize-schema: always
+      initialize-schema: embedded
       schema: classpath:tables_mysql.sql
       platform: mysql
   # quartz 에 대한 porperty 정보들은 quartz.properties 파일로 이동
