@@ -1,4 +1,5 @@
 rootProject.name = 'SpringBootToyPlace'
+include 'EncryptProperty'
 include 'EnumStrategy'
 include 'InstanceTypeCheck'
 include 'JsonColumnMapping'
