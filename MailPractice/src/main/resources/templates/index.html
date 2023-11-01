@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title></head>
+<body>
+<div style="font-family: 'Apple SD Gothic Neo', 'sans-serif' !important; width: 400px; height: 600px; border-top: 4px solid #140D77; margin: 100px auto; padding: 30px 20px; box-sizing: border-box;">
+    <h1 style="margin: 0; padding: 0 5px; font-size: 28px; font-weight: 400;">
+        <span style="font-size: 30px; margin: 0 0 10px 3px;"> My Service </span> <br/>
+        <span style="color: #645CEC">메일인증</span> 안내입니다.
+    </h1>
+    <p style="font-size: 16px; line-height: 26px; margin-top: 50px; padding: 0 5px;"> 아래
+        <b style="color: #5F54EC">'인증코드'</b> 를 화면 인증칸에 입력해주세요.<br/> 감사합니다.
+    </p>
+    <div style="color: #FFF; text-decoration: none; text-align: center">
+        <p style="display: inline-block; width: 210px; height: 45px; margin: 30px 5px 40px; background: #5F54EC; line-height: 45px; vertical-align: middle; font-size: 16px;"
+           th:text="${text}">
+        </p>
+    </div>
+    <div style="border-top: 1px solid #DDD; padding: 5px;"></div>
+</div>
+</body>
+</html>
