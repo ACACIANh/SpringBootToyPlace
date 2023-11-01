@@ -11,6 +11,6 @@ public class EventListenerFirst {
 	@Async
 	@EventListener( classes = EchoEvent.class )
 	public void handle( EchoEvent echoEvent ) {
-		log.info( "Class: {}, message: {}", EventListenerFirst.class.getSimpleName(), echoEvent.getMessage() );
+		log.info( "listener class: {}, event class: {}, message: {}", this.getClass().getSimpleName(), echoEvent.getClass().getSimpleName(), echoEvent.getMessage() );
 	}
 }

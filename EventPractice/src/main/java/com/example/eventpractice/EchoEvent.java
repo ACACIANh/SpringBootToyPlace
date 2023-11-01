@@ -5,6 +5,6 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Getter
-public class EchoEvent {
+public class EchoEvent extends AbstractEvent{
 	private final String message;
 }
