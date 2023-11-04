@@ -12,5 +12,11 @@ public class HandlerFirst implements AbstractHandler {
 	@Override
 	public void handle( @Valid AbstractRequest request ) {
 		log.info( request.getClass().getSimpleName() );
+		log.info( "checked negativeInt {} ", request );
+	}
+
+	@Override
+	public AbstractRequest parse( RequestThird third ) {
+		return new RequestFirst( third.getName(), third.getNegativeInt() );
 	}
 }

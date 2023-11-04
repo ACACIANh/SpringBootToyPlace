@@ -32,3 +32,48 @@ Content-Type: application/json
   "name": "second",
   "max10": 11
 }
+
+### first 성공
+POST http://localhost:8080/v1/third
+Content-Type: application/json
+
+{
+  "name": "third",
+  "negativeInt": -1,
+  "max10": 11,
+  "isFirst": true
+}
+
+### first 실패
+POST http://localhost:8080/v1/third
+Content-Type: application/json
+
+{
+  "name": "third",
+  "negativeInt": 1,
+  "max10": 11,
+  "isFirst": true
+}
+
+
+### second 성공
+POST http://localhost:8080/v1/third
+Content-Type: application/json
+
+{
+  "name": "third",
+  "negativeInt": 1,
+  "max10": 5,
+  "isFirst": false
+}
+
+### second 실패
+POST http://localhost:8080/v1/third
+Content-Type: application/json
+
+{
+  "name": "third",
+  "negativeInt": 1,
+  "max10": 11,
+  "isFirst": false
+}
