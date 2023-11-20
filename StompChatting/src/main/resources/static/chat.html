@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        /* CSS styles organized with comments */
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Chat container styles */
+        .container {
+            width: 500px;
+            margin: 0 auto;
+            padding: 25px;
+        }
+
+        /* Chatting box styles */
+        .chatting {
+            border: 1px solid gray;
+            width: 700px;
+            height: 700px;
+            overflow: auto;
+        }
+
+        /* Input field styles */
+        input[type="text"] {
+            width: 450px;
+            height: 50px;
+        }
+
+        /* Message colors */
+        .me {
+            color: blue;
+        }
+
+        .other {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div class="container" id="container">
+    <h1 id="title_room">바보채팅방</h1>
+    <div id="chatting" class="chatting"></div>
+    <div id="yourMsg">
+        <input id="msg" type="text" placeholder="보내실 메시지를 입력하세요.">
+        <button onclick="send()" id="sendBtn">보내기</button>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<script>
+    var userId = prompt("사용자 닉네임을 입력해주세요");
+    if (userId === null || userId.trim() === '') {
+        userId = "닉네임도없는사람";
+    }
+
+    function connect() {
+        var socket = new SockJS("/chat");
+        stompClient = Stomp.over(socket);
+
+        stompClient.connect({}, onConnect, onError);
+    }
+
+    function onConnect() {
+        sub = stompClient.subscribe('/topic/public', function (e) {
+            var message = JSON.parse(e.body);
+            if (message.messageType === 'ENTRY') {
+                showEntryExitMessage(message.contents);
+            } else if (message.messageType === 'EXIT') {
+                showEntryExitMessage(message.contents);
+            } else {
+                showMessage(message);
+            }
+        });
+
+        // Send entry message when connected
+        sendEntryMessage();
+    }
+
+    function onError(error) {
+        alert('에러발생: ' + error);
+    }
+
+    function sendEntryMessage() {
+        var entryMessage = {
+            'sender': userId,
+            'contents': userId + '님이 입장하셨습니다.',
+            'messageType': 'ENTRY'
+        };
+        stompClient.send("/app/chat/send", {}, JSON.stringify(entryMessage));
+    }
+
+    function sendExitMessage() {
+        var exitMessage = {
+            'sender': userId,
+            'contents': userId + '님이 퇴장하셨습니다.',
+            'messageType': 'EXIT'
+        };
+        stompClient.send("/app/chat/send", {}, JSON.stringify(exitMessage));
+    }
+
+    function showEntryExitMessage(message) {
+        var div = $('#chatting');
+        div.append('<p>' + message + '</p>');
+        div.scrollTop(div.prop('scrollHeight'));
+    }
+
+    function showMessage(data) {
+        var div = $('#chatting');
+        div.append('<p class="' + (data.sender === userId ? 'me' : 'other') + '">' + data.sender + ' : ' + data.contents + '</p>');
+        div.scrollTop(div.prop('scrollHeight'));
+    }
+
+    function send() {
+        var message = $("#msg").val().trim();
+        if (message !== '') {
+            var data = {
+                'sender': userId,
+                'contents': message,
+                'messageType': 'CHAT'
+            };
+            stompClient.send("/app/chat/send", {}, JSON.stringify(data));
+            $("#msg").val('');
+        } else {
+            alert('메시지를 입력하세요.');
+        }
+    }
+
+    $('#msg').keypress(function (e) {
+        if (e.key === 'Enter') {
+            send();
+        }
+    });
+
+    // Send exit message when the window is closed or refreshed
+    window.onbeforeunload = function () {
+        sendExitMessage();
+    };
+
+    connect();
+</script>
+</body>
+</html>
