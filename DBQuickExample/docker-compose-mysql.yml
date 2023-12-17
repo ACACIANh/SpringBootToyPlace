@@ -1,0 +1,22 @@
+version: "3.0"
+services:
+  db:
+    image: mysql
+    restart: always
+    container_name: mysql-test
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: "9999"
+      TZ: "Asia/Seoul"
+      MYSQL_DATABASE: "my_scheme"
+      MYSQL_USER: "acacian"
+      MYSQL_PASSWORD: "acacian"
+      MYSQL_ROOT_HOST: "%"
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - /Users/Shared/data/mysql-test:/var/lib/mysql
+
+# docker-compose -f docker-compose-mysql.yml up -d 실행
