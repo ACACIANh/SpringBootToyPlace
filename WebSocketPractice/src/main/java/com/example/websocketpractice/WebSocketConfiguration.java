@@ -12,10 +12,11 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 public class WebSocketConfiguration implements WebSocketConfigurer {
 
 	private final SocketTextHandler socketTextHandler;
+	private final CustomExceptionHandler customExceptionHandler;
 
 	@Override
 	public void registerWebSocketHandlers( WebSocketHandlerRegistry registry ) {
-		registry.addHandler( socketTextHandler, "ws/user" )
+		registry.addHandler( customExceptionHandler, "/chat" )
 				.setAllowedOrigins( "*" );
 	}
 }
